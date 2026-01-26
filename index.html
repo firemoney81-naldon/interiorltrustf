@@ -1,23 +1,597 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+ <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "수원 인테리어 및 리모델링 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "수원 인테리어 전문 업체",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "수원시"
+      },
+      "description": "수원시 전 지역(영통구, 권선구, 팔달구, 장안구) 아파트, 주택, 상가 인테리어 및 리모델링 전문 서비스. 2026년 최신 트렌드를 반영한 맞춤형 디자인과 투명한 견적을 제공합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "수원 인테리어 서비스 종류",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "아파트 토탈 인테리어"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "1500000",
+              "priceCurrency": "KRW",
+              "description": "평당 가격 기준, 30평대 전체 리모델링"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "부분 인테리어 (주방/욕실)"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "3000000",
+              "priceCurrency": "KRW",
+              "description": "주방 또는 욕실 부분 시공 최저가"
+            }
+          }
+        ]
+      },
+      "url": "https://yourdomain.com"
+    }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        /*--- 변수 설정 ---*/
+        :root {
+            --main-color: #007bff; /* 청량한 파란색 */
+            --sub-color: #ff6f61; /* 강조색 */
+            --text-color: #333333; /* 기본 텍스트 색상 */
+            --soft-bg: #f8f9fa; /* 부드러운 배경색 */
+            --light-grey: #e9ecef; /* 경계선 색상 */
+        }
+
+        /*--- 기본 스타일 ---*/
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            background-color: var(--soft-bg);
+            color: var(--text-color);
+        }
+        header {
+            background: linear-gradient(135deg, var(--main-color), #0056b3);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+            border-bottom: 8px solid var(--sub-color);
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: -1px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        h2 {
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-top: 2rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 4px solid var(--main-color);
+            display: inline-block;
+        }
+        h3 {
+            color: var(--main-color);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        main {
+            max-width: 1000px;
+            margin: 2.5rem auto;
+            padding: 0 1.5rem;
+        }
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        section p, section ul, section dl {
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /*--- 리스트 스타일 ---*/
+        ul.styled-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        ul.styled-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+        }
+        ul.styled-list li::before {
+            content: attr(data-icon);
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.2rem;
+            color: var(--main-color);
+            font-weight: 700;
+        }
+
+        /*--- 테이블 스타일 ---*/
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 1.2rem;
+            text-align: center;
+            border: 1px solid var(--light-grey);
+        }
+        th {
+            background-color: var(--main-color);
+            color: white;
+            font-weight: 700;
+        }
+        tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+        .price-highlight {
+            font-weight: 700;
+            color: var(--sub-color);
+            font-size: 1.2rem;
+        }
+
+        /*--- CTA 버튼 스타일 ---*/
+        .cta-button {
+            display: inline-block;
+            background-color: var(--sub-color);
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            margin: 2rem 0;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-align: center;
+            box-shadow: 0 6px 15px rgba(255, 111, 97, 0.3);
+        }
+        .cta-button:hover {
+            background-color: #e65c52;
+            transform: translateY(-3px);
+        }
+
+        /*--- 키워드 태그 스타일 ---*/
+        .keyword-tags {
+            margin: 2rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+        .keyword-tags a {
+            background-color: #e3f2fd;
+            color: var(--main-color);
+            padding: 10px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .keyword-tags a:hover {
+            background-color: #bbdefb;
+        }
+
+        /*--- 외부 링크 스타일 ---*/
+        .external-links ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .external-links li {
+            margin-bottom: 15px;
+            border-left: 3px solid var(--sub-color);
+            padding-left: 15px;
+        }
+        .external-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .external-links a:hover {
+            text-decoration: underline;
+            color: var(--main-color);
+        }
+
+        /*--- FAQ 아코디언 스타일 ---*/
+        .faq-dl dt {
+            cursor: pointer;
+            border-bottom: 1px solid var(--light-grey);
+            padding: 1rem 0;
+            font-weight: 700;
+            transition: color 0.3s ease;
+        }
+        .faq-dl dt:hover {
+            color: var(--main-color);
+        }
+        .faq-dl dd {
+            padding: 1rem 0 1rem 1rem;
+            margin: 0;
+            background-color: var(--soft-bg);
+            border-left: 3px solid var(--sub-color);
+            font-size: 1rem;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .faq-dl dt[aria-expanded="true"] + dd {
+            display: block;
+            opacity: 1;
+        }
+
+        /*--- 폼 스타일 ---*/
+        form {
+            background-color: #f9f9f9;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+        }
+        form label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        form input[type="text"], form input[type="tel"], form input[type="email"], form textarea {
+            width: calc(100% - 2rem);
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        form button {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+
+        /*--- 이미지 및 그래프 스타일 ---*/
+        .image-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 2rem 0;
+        }
+        .image-item {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .image-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .chart-container {
+            padding: 1.5rem;
+            border: 1px solid var(--light-grey);
+            border-radius: 8px;
+            background-color: #fcfcfc;
+            margin-top: 1.5rem;
+        }
+        .chart-container h4 {
+            color: var(--sub-color);
+            margin-top: 0;
+        }
+
+        /*--- 푸터 스타일 ---*/
+        footer {
+            text-align: center;
+            padding: 2.5rem;
+            font-size: 0.9rem;
+            color: #6c757d;
+            background-color: #e9ecef;
+            margin-top: 3rem;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>수원 인테리어 업체 | 2026년 최신 트렌드 완벽 시공</h1>
+        <p>수원 영통구, 권선구, 팔달구, 장안구 아파트 리모델링 전문. 합리적인 견적과 완벽한 시공을 약속드립니다.</p>
+        <nav>
+            <ul>
+                <li><a href="#service">서비스 종류</a></li>
+                <li><a href="#price">견적 가이드</a></li>
+                <li><a href="#review">시공 후기</a></li>
+                <li><a href="#contact">문의하기</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="service">
+            <h2>수원 아파트 인테리어, 현명하게 선택하는 방법</h2>
+            <p><strong>수원 인테리어 업체</strong>를 찾는 고객님들이 가장 중요하게 생각하는 것은 '신뢰'입니다. 수많은 업체 중에서 우리 집의 가치를 높여줄 파트너를 찾는 일은 쉽지 않습니다. 저희는 수원 지역 아파트 및 주택에 대한 깊은 이해를 바탕으로, 고객님의 예산과 취향에 맞는 맞춤형 인테리어를 제안합니다. 특히, 2026년도 인테리어 트렌드에 맞춰 자재 선택부터 디자인까지 전문적인 상담을 제공합니다.</p>
+
+            <div class="keyword-tags" aria-label="수원 인테리어 관련 키워드">
+                <a href="#price">수원 인테리어 비용</a>
+                <a href="#review">수원 인테리어 내돈내산</a>
+                <a href="#service">수원 아파트 리모델링</a>
+                <a href="#service">수원 영통구 인테리어</a>
+                <a href="#price">수원 인테리어 평당 가격</a>
+                <a href="#contact">수원 인테리어 견적 비교</a>
+                <a href="#service">수원 인테리어 싼곳</a>
+                <a href="#review">수원 인테리어 후기</a>
+                <a href="#service">수원 30평대 인테리어</a>
+                <a href="#service">수원 주택 리모델링</a>
+                <a href="#price">수원 인테리어 평균 금액</a>
+                <a href="#service">수원 인테리어 장점</a>
+                <a href="#faq">수원 인테리어 단점</a>
+                <a href="#faq">수원 인테리어 차이점</a>
+                <a href="#review">수원 인테리어 순위</a>
+                <a href="#contact">수원 인테리어 추천</a>
+            </div>
+
+            <h3>수원 지역별 맞춤 인테리어 전략</h3>
+            <p>수원시는 신축 아파트 단지가 많은 <strong>영통구</strong>와 광교 지역, 그리고 재건축 및 리모델링 수요가 높은 <strong>팔달구</strong>와 <strong>권선구</strong> 등 지역별 특성이 뚜렷합니다. 각 지역의 주택 노후도와 아파트 구조에 따라 인테리어 접근 방식이 달라져야 합니다.</p>
+            <ul class="styled-list">
+                <li data-icon="✓"><strong>영통구/광교 지역:</strong> 신축 입주 아파트의 경우, 불필요한 공사 없이 기존 구조를 최대한 활용한 부분 인테리어 또는 커스터마이징 디자인에 집중합니다. 수납공간 확대, 팬트리 설치, 조명 디자인 변경 등을 통해 실용성을 높이는 데 주력합니다.</li>
+                <li data-icon="✓"><strong>팔달구/권선구 지역:</strong> 구축 아파트가 많은 만큼, 전체적인 올수리(Total Remodeling) 수요가 높습니다. 단열 보강, 샷시 교체, 배관 점검 등 기반 시설 공사가 중요하며, 안전성과 효율성을 최우선으로 고려해야 합니다.</li>
+                <li data-icon="✓"><strong>장안구 지역:</strong> 주거 환경 개선 사업이 활발한 지역으로, 주택 인테리어 및 빌라 리모델링 문의가 많습니다. 아파트와 달리 구조 변경의 폭이 넓어 맞춤형 디자인 설계가 중요합니다.</li>
+            </ul>
+            <p>저희 업체는 수원 지역의 이러한 특성을 정확히 파악하고, 고객님의 거주 환경에 가장 적합한 <strong>인테리어 장점</strong>을 극대화할 수 있도록 컨설팅을 제공합니다.</p>
+            <p>2026년 인테리어 트렌드의 핵심은 <strong>친환경 자재와 스마트 홈 기술</strong>의 결합입니다. 저희는 E0 등급 이상의 친환경 자재를 사용하며, 고객님의 편의를 위해 스마트 조명, IoT 가전 연동 등 첨단 기술을 적극적으로 도입하고 있습니다. 특히 <strong>수원 인테리어</strong> 시장에서 <strong>내돈내산</strong> 고객들의 만족도가 높은 디자인은 미니멀리즘을 기반으로 한 따뜻한 우드 톤과 화이트 톤의 조합입니다.</p>
+
+        </section>
+
+        <section id="price">
+            <h2>수원 인테리어 비용: 2026년 견적 가이드</h2>
+            <p><strong>수원 인테리어 견적</strong>은 단순히 평당 가격으로만 결정되지 않습니다. 자재의 등급(일반/고급), 공사 범위(전체/부분), 디자인의 난이도, 그리고 2026년의 인건비 및 자재비 변동 요인이 복합적으로 작용합니다. "수원 인테리어 싼곳"을 찾기 전에, 견적서에 포함된 항목을 꼼꼼히 확인하여 "내돈내산 후기"처럼 만족스러운 결과를 얻는 것이 중요합니다.</p>
+
+            <h3>인테리어 비용 구성 요소 상세 분석</h3>
+            <p>일반적으로 인테리어 비용은 자재비(Material cost) 40%, 인건비(Labor cost) 30%, 경비 및 기타 비용(Overhead) 20%, 디자인 및 이윤(Design fee & Profit) 10%의 비율로 구성됩니다. 2026년 기준, 인건비와 원자재 가격 상승으로 인해 <strong>수원 인테리어 평균 비용</strong>이 예년 대비 10~15% 정도 상승할 것으로 예상됩니다. 특히 주방 및 욕실 자재(타일, 위생도기, 수전)의 가격 변동폭이 큽니다.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>인테리어 유형</th>
+                        <th>공사 범위</th>
+                        <th>대략적인 평당 가격 (2026년 예상)</th>
+                        <th>평균 시공 기간</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>부분 인테리어</strong></td>
+                        <td>주방/욕실, 샷시, 마루 등 1~2개 공정</td>
+                        <td><span class="price-highlight">70만원 ~ 120만원</span></td>
+                        <td>3일 ~ 1주</td>
+                    </tr>
+                    <tr>
+                        <td><strong>경량 리모델링</strong></td>
+                        <td>도배, 장판, 조명, 도장 등 표면 마감재 교체</td>
+                        <td><span class="price-highlight">100만원 ~ 150만원</span></td>
+                        <td>1주 ~ 2주</td>
+                    </tr>
+                    <tr>
+                        <td><strong>토탈 리모델링</strong></td>
+                        <td>전체 마감재 교체 + 욕실, 주방, 샷시 교체</td>
+                        <td><span class="price-highlight">150만원 ~ 250만원</span></td>
+                        <td>3주 ~ 4주</td>
+                    </tr>
+                    <tr>
+                        <td><strong>프리미엄 리모델링</strong></td>
+                        <td>고급 수입 자재 사용, 맞춤 가구 및 구조 변경 포함</td>
+                        <td><span class="price-highlight">250만원 ~</span></td>
+                        <td>4주 ~ 8주</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p><strong>참고:</strong> 위 비용은 30평대 아파트 기준의 대략적인 <strong>수원 인테리어 예상 금액</strong>입니다. 정확한 <strong>수원 인테리어 견적</strong>은 현장 실측을 통해 받아보시는 것이 가장 좋습니다. 무조건 <strong>저렴한곳</strong>만 찾기보다는, 꼼꼼한 견적서 비교를 통해 숨겨진 비용이 없는지 확인하세요.</p>
+
+            <h3>수원 인테리어 <strong>평당 가격</strong> 분석 (20평대 vs 30평대)</h3>
+            <p>인테리어 평당 가격은 평수가 넓어질수록 낮아지는 경향이 있습니다. 이는 기본적으로 발생하는 공통 비용(예: 인건비, 자재 운반비 등)이 평수와 무관하게 고정되는 부분이 있기 때문입니다. <strong>20평대 인테리어</strong>의 경우 평당 단가가 높게 책정될 수 있으며, <strong>30평대 인테리어</strong>는 상대적으로 효율적인 비용으로 시공이 가능합니다. 저희 업체는 평수에 따른 최적의 <strong>수원 인테리어 비용</strong>을 산출하여 거품 없는 견적을 제공합니다.</p>
+            <div class="chart-container">
+                <h4>평형대별 인테리어 총 비용 비교 (표준 시공, 2026년 기준)</h4>
+                <p>20평대와 30평대 아파트의 리모델링 총 비용 비교 예시입니다.</p>
+                <!-- 실제 그래프 이미지 대신 텍스트로 대체 -->
+                <ul>
+                    <li><strong>24평 아파트 (평당 180만원 가정):</strong> 총 예상 비용 4,320만원</li>
+                    <li><strong>34평 아파트 (평당 160만원 가정):</strong> 총 예상 비용 5,440만원</li>
+                </ul>
+            </div>
+
+            <p><strong>수원 인테리어 추천</strong> 업체를 찾을 때는 단순히 총액만 비교하지 말고, <strong>견적서 비교</strong>를 통해 각 항목별 단가와 사용 자재 등급을 확인해야 합니다. <strong>저렴한곳</strong>이 아닌, 합리적인 <strong>비용</strong>으로 높은 <strong>장점</strong>을 누릴 수 있는 업체를 선택하는 지혜가 필요합니다.</p>
+
+        </section>
+
+        <section id="process">
+            <h2>성공적인 수원 리모델링을 위한 5단계 프로세스</h2>
+            <p>인테리어는 단순히 미관을 개선하는 작업을 넘어, 고객님의 삶의 질을 향상시키는 중요한 투자입니다. 저희는 체계적인 5단계 프로세스를 통해 <strong>수원 인테리어 업체</strong>로서의 전문성을 입증합니다.</p>
+            <ul class="styled-list">
+                <li data-icon="1️⃣"><strong>1단계: 전문 상담 및 현장 실측 (Consultation & Site Visit)</strong>
+                    <p>고객님의 라이프스타일, 예산, 디자인 선호도를 파악합니다. 수원 지역 아파트 및 주택 현장을 직접 방문하여 정확한 실측을 진행하고, 노후도 진단 및 구조적 특성을 분석합니다. 특히 <strong>수원 권선구</strong>, <strong>수원 팔달구</strong> 등 구축 아파트의 경우 단열, 누수, 배관 등의 문제점을 사전에 파악합니다.</p>
+                </li>
+                <li data-icon="2️⃣"><strong>2단계: 디자인 제안 및 상세 견적서 작성 (Design Proposal & Quotation)</strong>
+                    <p>실측 데이터를 기반으로 2D/3D 시안을 제안합니다. 고객님의 예산에 맞는 자재 선택을 돕고, 항목별 상세 견적서를 제공하여 <strong>수원 인테리어 비용</strong>의 투명성을 확보합니다. 불필요한 공사 항목은 과감하게 제외하고, <strong>인테리어 장점</strong>을 극대화할 수 있도록 컨설팅합니다.</p>
+                </li>
+                <li data-icon="3️⃣"><strong>3단계: 시공 계약 및 자재 확정 (Contract & Material Selection)</strong>
+                    <p>공정별 일정, 책임 소재, A/S 기간, 하자 보증 내용을 명확히 명시한 계약서를 작성합니다. 고객님과 함께 자재 샘플을 직접 확인하여 최종 확정하며, 공사 시작 전 최종 점검을 진행합니다. <strong>내돈내산</strong> 고객님들이 가장 궁금해하는 부분 중 하나인 자재의 <strong>장단점</strong>을 상세히 설명해드립니다.</p>
+                </li>
+                <li data-icon="4️⃣"><strong>4단계: 시공 진행 및 공정 관리 (Construction Management)</strong>
+                    <p>시공 일정에 맞춰 전문 인력이 투입됩니다. 저희는 수원 내 모든 현장에 전문 공정 관리자를 배정하여 시공 품질을 철저히 관리합니다. 특히 소음 및 진동에 민감한 아파트 공사의 경우, 민원 발생을 최소화하기 위해 노력합니다. <strong>수원 영통구</strong>와 같은 대단지 아파트 밀집 지역에서는 이웃 주민과의 관계를 고려한 세심한 관리가 필수적입니다.</p>
+                </li>
+                <li data-icon="5️⃣"><strong>5단계: 최종 점검 및 사후 관리 (Final Inspection & After-Sales Service)</strong>
+                    <p>공사 완료 후 고객님과 함께 최종 점검을 진행합니다. 시공 후에도 하자 발생 시 신속하게 대처할 수 있도록 명확한 A/S 보증 기간을 약속합니다. <strong>내돈내산 후기</strong>를 남기는 고객님들이 만족할 수 있도록 끝까지 책임집니다.</p>
+                </li>
+            </ul>
+        </section>
+
+        <section id="review">
+            <h2>수원 인테리어 내돈내산 후기 및 포트폴리오</h2>
+            <p><strong>수원 인테리어 업체</strong>를 선택할 때 가장 중요한 기준은 실제 고객의 만족도입니다. 저희는 영통구, 권선구, 팔달구, 장안구 등 수원 전 지역에서 진행한 다양한 아파트, 주택 리모델링 포트폴리오를 보유하고 있습니다. 실제 시공 사례를 통해 저희의 기술력과 디자인 감각을 확인해보세요.</p>
+
+            <div class="image-container">
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/400x300?text=Suwon+Interior+Example+1" alt="수원 영통구 아파트 주방 인테리어">
+                    <p style="text-align: center; font-size: 0.9rem; margin: 0.5rem 0;">영통구 34평 아파트, 주방 확장형 리모델링</p>
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/400x300?text=Suwon+Interior+Example+2" alt="수원 권선구 주택 거실 인테리어">
+                    <p style="text-align: center; font-size: 0.9rem; margin: 0.5rem 0;">권선구 2층 주택, 거실 아트월 및 조명 시공</p>
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/400x300?text=Suwon+Interior+Example+3" alt="수원 팔달구 아파트 욕실 인테리어">
+                    <p style="text-align: center; font-size: 0.9rem; margin: 0.5rem 0;">팔달구 24평 아파트, 욕실 올수리 및 타일 교체</p>
+                </div>
+                <div class="image-item">
+                    <img src="https://via.placeholder.com/400x300?text=Suwon+Interior+Example+4" alt="수원 장안구 상가 인테리어">
+                    <p style="text-align: center; font-size: 0.9rem; margin: 0.5rem 0;">장안구 상가 1층, 감성 카페 인테리어</p>
+                </div>
+            </div>
+
+            <h3>시공 후기 엿보기: "내돈내산" 고객님의 솔직한 평가</h3>
+            <p>저희 업체는 광고성 후기가 아닌, 실제 고객님들의 진솔한 평가를 기반으로 성장하고 있습니다. <strong>수원 인테리어 업체</strong> 선정 시 "내돈내산 후기"를 꼼꼼히 살펴보는 것이 좋습니다. 저희는 견적, 디자인, 시공 품질, 사후 관리 등 전 과정에서 높은 만족도를 기록하고 있습니다.</p>
+            <blockquote>
+                <p><strong>고객 후기:</strong> 수원 영통구 망포동 아파트 거주 | "인테리어 비용이 생각보다 많이 올라서 고민이 많았는데, 여러 업체 비교 끝에 이곳을 선택했어요. 다른 곳보다 <strong>수원 인테리어 견적</strong>이 합리적이었고, 특히 디자인 제안이 탁월했습니다. 구축 아파트라 걱정했는데, 단열 보강까지 꼼꼼하게 해주셔서 겨울을 따뜻하게 보낼 수 있게 되었습니다."</p>
+                <cite>- 망포동 푸르지오 거주 OOO님</cite>
+            </blockquote>
+            <p>수원 지역 아파트별 리모델링 특징 (예: <strong>수원 매탄동 인테리어</strong>, <strong>수원 정자동 인테리어</strong>)을 살린 맞춤형 포트폴리오를 더 많이 보유하고 있습니다. 직접 문의하시면 더 다양한 사례를 보실 수 있습니다.</p>
+
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <p><strong>수원 인테리어 업체</strong> 선정 시 고객님들이 가장 궁금해하는 질문들을 모아봤습니다.</p>
+            <dl class="faq-dl">
+                <dt tabindex="0" aria-expanded="false">수원 인테리어, <strong>저렴한곳</strong>과 비싼 곳의 차이점은 무엇인가요?</dt>
+                <dd>가격 차이는 주로 자재의 등급과 시공 인력의 숙련도, 그리고 디자인 역량에서 발생합니다. <strong>저렴한곳</strong>은 인건비 절감을 위해 비숙련 인력을 사용하거나, 등급이 낮은 자재를 쓰는 경우가 많습니다. 비싼 곳은 고급 자재, 맞춤 디자인, 전문 기술자를 투입하여 시공 품질을 높입니다. <strong>내돈내산 후기</strong>를 참고하여 적정 가격대의 신뢰할 수 있는 업체를 선택하는 것이 중요합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">아파트 리모델링 시 <strong>관리사무소 통보</strong>는 언제 해야 하나요?</dt>
+                <dd>아파트 관리사무소에 리모델링 공사 사실을 통보하는 것은 필수입니다. 최소 공사 시작 1~2주 전에 통보하여 엘리베이터 사용 가능 여부와 공사 시간을 확인해야 합니다. 특히 주거 밀집 지역인 <strong>수원 영통구</strong>나 <strong>권선구</strong> 아파트 단지에서는 이웃 주민과의 마찰을 줄이기 위해 관리사무소와의 협의가 더욱 중요합니다.</dd>
+                <dt tabindex="0" aria-expanded="false">인테리어 공사 중 파손이나 하자가 발생하면 어떻게 처리되나요?</dt>
+                <dd>계약서에 명시된 하자보수 기간(일반적으로 1~2년) 내에 발생한 시공상의 하자는 책임지고 무상 보수해드립니다. 저희는 <strong>전문 업체</strong>로서 적재물배상책임보험을 통해 고객님의 재산에 대한 피해도 보상할 수 있도록 대비하고 있습니다. 계약 전 반드시 A/S 기간과 범위를 확인하세요.</dd>
+                <dt tabindex="0" aria-expanded="false">셀프 인테리어와 전문 업체를 통한 <strong>토탈 인테리어</strong>, 어떤 차이가 있나요?</dt>
+                <dd><strong>셀프 인테리어 장점</strong>은 비용 절감과 높은 만족도이지만, 공사 기간이 길어지고 비전문적인 시공으로 인한 하자가 발생할 위험이 높습니다. <strong>토탈 인테리어</strong>는 <strong>전문 업체</strong>가 전체 공사를 책임지기 때문에 공사 기간이 단축되고, 품질 보증이 확실하며, 미적인 완성도가 높습니다. <strong>수원 아파트 리모델링</strong> 시 단열이나 방수 등 전문적인 기술이 필요한 공정은 반드시 전문 업체에 맡기는 것이 좋습니다.</dd>
+                <dt tabindex="0" aria-expanded="false">2026년 인테리어 트렌드와 <strong>장단점</strong>은 무엇인가요?</dt>
+                <dd>2026년에는 '지속 가능성'과 '개인화'가 주요 트렌드입니다. 친환경 자재 사용, 에너지 효율을 높이는 스마트 홈 시스템 도입, 재활용 가구 활용 등이 인기를 끌고 있습니다. <strong>장점</strong>으로는 건강한 주거 환경과 편리성 향상이 있지만, <strong>단점</strong>으로는 초기 시공 <strong>비용</strong>이 다소 높아질 수 있다는 점이 있습니다.</dd>
+            </dl>
+        </section>
+
+        <section class="external-links">
+            <h2>신뢰할 수 있는 외부 정보: 이사 및 인테리어 관련 유용한 사이트</h2>
+            <p><strong>수원 인테리어 업체</strong> 선정과 리모델링 계획에 도움이 될 만한 공신력 있는 외부 자료를 소개합니다.</p>
+            <ul>
+                <li><a href="https://www.ftc.go.kr/www/cpw/service/selectBusi.do?key=670&busiType=08" target="_blank">공정거래위원회 이사화물 표준약관 확인:</a> 인테리어 및 이사 관련 소비자 분쟁 해결에 도움이 되는 표준 약관을 확인할 수 있습니다.</li>
+                <li><a href="https://www.kca.go.kr/" target="_blank">한국소비자원:</a> 인테리어 시공 관련 소비자 피해사례 및 분쟁 해결 기준 정보를 제공합니다.</li>
+                <li><a href="http://kosid.or.kr/" target="_blank">한국실내건축가협회 (KOSID):</a> 전문적인 인테리어 디자인 정보 및 자격증 관련 정보를 얻을 수 있습니다.</li>
+                <li><a href="https://www.molit.go.kr/intro.jsp" target="_blank">국토교통부:</a> 건축법 및 주택 관련 정책, 하자보수 기준 등 법규 관련 정보를 확인할 수 있습니다.</li>
+                <li><a href="https://www.kic.re.kr/" target="_blank">한국건설산업연구원:</a> 건설 및 인테리어 시장 동향, 자재비 변동 등 전문적인 정보를 얻을 수 있습니다.</li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>수원 인테리어 견적 및 예약 문의 (추가 상담)</h2>
+            <p><strong>수원 인테리어 업체</strong> 선정에 도움이 필요하신가요? 저희는 수원 지역 전문가로서 고객님의 상황에 맞는 최적의 <strong>수원 인테리어 견적</strong>을 무료로 제공합니다. 아래의 방법으로 편하게 문의해주세요.</p>
+            <form id="contact-form-main">
+                <h4>온라인 상담 신청</h4>
+                <p><strong>수원 인테리어 견적</strong>은 현장 조건과 자재 선택에 따라 크게 달라집니다. 자세한 정보 입력 시 더 정확한 <strong>예상 금액</strong>을 안내해 드릴 수 있습니다.</p>
+                <label for="name_main">성함</label>
+                <input type="text" id="name_main" placeholder="성함을 입력해주세요" required>
+                <label for="phone_main">연락처</label>
+                <input type="tel" id="phone_main" placeholder="010-0000-0000" required>
+                <label for="email_main">이메일 주소</label>
+                <input type="email" id="email_main" placeholder="이메일 주소를 입력해주세요 (선택사항)">
+                <label for="address_main">시공 주소 (수원시 OOO동)</label>
+                <input type="text" id="address_main" placeholder="예: 수원시 영통구 매탄동 아파트" required>
+                <label for="message_main">문의 내용 (구체적인 희망 사항)</label>
+                <textarea id="message_main" placeholder="예: 30평대 아파트 전체 리모델링 희망, 예상 예산 3천만원, 희망 시공 시기 등"></textarea>
+                <button type="submit">상담 신청하기</button>
+            </form>
+
+            <div style="text-align: center; margin-top: 2rem;">
+                <p><strong>전화 문의:</strong> <a href="tel:01012345678" class="cta-button">전화로 바로 상담받기 📞 010-1234-5678</a></p>
+            </div>
+        </section>
     </main>
-  </body>
-</html>
+
+    <script>
+        // FAQ 아코디언 기능
+        document.querySelectorAll('dl.faq-dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const dd = dt.nextElementSibling;
+                const isActive = dt.getAttribute('aria-expanded') === 'true';
+                document.querySelectorAll('dl.faq-dl dt').forEach(item => {
+                    item.setAttribute('aria-expanded', 'false');
+                    item.nextElementSibling.style.display = 'none';
+                });
+                if (!isActive) {
+                    dt.setAttribute('aria-expanded', 'true');
+                    dd.style.display = 'block';
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+
+        // 간단한 폼 제출 알림
+        document.getElementById('contact-form-main').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('상담 신청이 접수되었습니다. 곧 연락드리겠습니다.');
+        });
+    </script>
+
+  
